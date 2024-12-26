@@ -1,4 +1,4 @@
-from Forum import Forum
+from Forum.Forum import Forum
 import requests
 import os
 

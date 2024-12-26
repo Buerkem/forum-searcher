@@ -1,6 +1,6 @@
 import requests
 import json
-from Forum import Forum
+from Forum.Forum import Forum
 
 class Leetcode(Forum):
     BASE_URL = "https://leetcode.com/graphql"
