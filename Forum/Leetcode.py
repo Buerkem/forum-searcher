@@ -123,7 +123,9 @@ class Leetcode(Forum):
             return json.dumps({"error": "Unable to fetch the main post."}, indent=4)
 
     def fetch_posts(self, filter_keyword: str="", start_page: int=1, end_page: int=2):
-        first = end_page
+        posts_per_page = 15
+        skip = (start_page - 1) * posts_per_page #posts to skip depending to get to start post
+        total_posts_to_fetch = (end_page - start_page + 1) * posts_per_page
         forum_link = "https://leetcode.com"
         query = """
         query categoryTopicList($categories: [String!]!, $first: Int!, $orderBy: TopicSortingOption, $skip: Int, $query: String, $tags: [String!]) {
@@ -140,9 +142,9 @@ class Leetcode(Forum):
         
         variables = {
             "categories": ["interview-question"],
-            "first": first,
+            "first": total_posts_to_fetch,
             "orderBy": "hot",
-            "skip": 0,
+            "skip": skip,
             "query": filter_keyword,
             "tags": []
         }
