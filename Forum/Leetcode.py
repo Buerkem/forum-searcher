@@ -28,9 +28,9 @@ class Leetcode(Forum):
         
         if response.status_code == 200:
             data = response.json()
-            
+
             # Check if the data contains the expected keys
-            if data and 'data' in data and 'topic' in data['data'] and 'post' in data['data']['topic']:
+            if data and not 'errors' in data and  'data' in data and 'topic' in data['data'] and 'post' in data['data']['topic']:
                 post_data = data['data']['topic']['post']
                 content = post_data.get('content', 'No content available')
                 

@@ -37,9 +37,6 @@ class Gemini(LLM):
 # load_dotenv()
 # gemini = Gemini(os.environ["GEMINI_API_KEY"]) 
 
-# # Configure the Gemini API with the provided API key.
-# gemini.configure_api()
-
 # # Now, use the `get_response` method to get a response for a given prompt.
 # prompt = "What are the latest trends in artificial intelligence?"
 # response = gemini.get_response(prompt)
