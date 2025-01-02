@@ -29,7 +29,7 @@ reddit_forum = Reddit(REDDIT_ACCESS_TOKEN)
 leetcode_forum = Leetcode()
 
 # Choose the forum
-forum = leetcode_forum
+forum = reddit_forum
 
 #Select the llm
 #gemini = Gemini(GEMINI_ACCESS_TOKEN)
@@ -37,10 +37,11 @@ chatgpt = ChatGPT(CHATGPT_ACCESS_TOKEN)  # Ensure you have the correct API key i
 llm = chatgpt
 
 # Define the range of pages to fetch
-start_page, end_page = 1, 200
+start_page, end_page = 1, 5
 
 # Fetch posts from the forum
 posts = forum.fetch_posts(filter_keyword="amazon", start_page=start_page, end_page=end_page)
+
 keywords_to_filter_out = [" oa ", " online assessment ", " oa","|oa","|online assessment", " online assessment"]
 # Function to filter out posts that mention online assessment
 def filter_posts(posts, keywords):
@@ -57,8 +58,8 @@ def filter_posts(posts, keywords):
 filtered_posts = filter_posts(posts, keywords_to_filter_out)
 
 prompt = (
-    "Does this post have an object oriented design question or low level design question and has the ood/lld question been described in the post?"
-    "Answer with only either ood (if its ood question) or lld or both if it has such a question and the exact question has been described else response should be no"
+    "Does this post have an amazon coding onsite question or amazon leadership principle question where the exact question has been mentioned in the post?"
+    "Answer with only either oq(onsite question) or lp(leadership principle question) or both if it has such a question and the exact question has been described else response should be no"
 )
 
 # Initialize list to store URLs with 'yes' response
@@ -93,7 +94,7 @@ with open(file_path, "w", encoding="utf-8") as file:
                 print(post_url)
 
         # Introduce a sleep time to ensure we don't exceed the rate limit (2,000 RPM)
-        time.sleep(60 / 2000)  # Sleep for 0.03 seconds between requests to stay within 2000 RPM limit
+        time.sleep(60 / 1000)  # Sleep for 0.03 seconds between requests to stay within 2000 RPM limit
 
 # Print the name of the file where URLs were saved
 print(f"URLs saved to file: {file_name}_{start_page}_{end_page}")
